@@ -7,7 +7,7 @@ using namespace std;
 
 Vecteur::Vecteur(){
     int n;
-    cout<<"creation d'une vecteur "<<endl;
+    cout<<endl<<endl<<"creation d'une vecteur "<<endl;
     cout<<"veuillez entrer la taille:";
     cin>>n;
     lenth=n;
@@ -19,6 +19,7 @@ Vecteur::Vecteur(){
         b.push_back(tmp);
         tmp=0;
     }
+    cout<<endl;
 }
 Vecteur::Vecteur(int n){
     lenth=n;

@@ -1,15 +1,10 @@
 #ifndef MATH_HPP
 #define MATH_HPP
 
-#include <iostream>
-#include <vector>
-#include "Vecteur.cpp"
-#include "Matrice.cpp"
-
+#include "Matrice.hpp"
 using namespace std;
 
-class Math
-{
+class Math{
 public:
     Math();
     ~Math();
@@ -17,6 +12,6 @@ public:
     static double multiplication(Vecteur A, Vecteur B);
     static Vecteur multiplication(double alpha, Vecteur B);
     static Vecteur multiplication(Matrice A, Vecteur V);
+    static void EquationDisplay(Matrice matrice,Vecteur vect);
 };
-
-#endif;
+#endif

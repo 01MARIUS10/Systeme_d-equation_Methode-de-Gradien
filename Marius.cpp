@@ -4,17 +4,21 @@
 #include "File.hpp"
 #include "Matrice.hpp"
 #include "Vecteur.hpp"
-#include "Equation.hpp"
 
+// on choisira comme epsilon
 #define EPS 0.000001
+
+// on choisira comme iteration maximal 
+// on supossera que a cette limite , la suite diverge
+#define MAX_ITERATION 3000
 
 using namespace std;
 
 
 int main(){
 
-    cout<<"Veuillez bien verifier que les donnees de la matrice soit dans le matrice.txt "<<endl;
-    cout<<"Et aussi que les donnees de la matrice colonne du second membre soit dans le vecteur.txt "<<endl;
+    cout<<endl<<"Veuillez bien verifier que les donnees de la matrice soit dans le 'matrice.txt' "<<endl;
+    cout<<"Et aussi que les donnees du 4vecteur colonne du second membre soit dans le 'vecteur.txt' "<<endl;
     
     // gestion des fichier
     File f1("matrice.txt");
@@ -22,7 +26,7 @@ int main(){
 
     // la dimension du systemes
     int n;
-    cout<<"Entrer la taille du systeme d'equation = ";
+    cout<<endl<<"Entrer la taille du systeme d'equation = ";
     cin>>n;
     
     // importation des Matrices et Vecteurs depuis les fichiers
@@ -30,7 +34,7 @@ int main(){
     Vecteur b(f2,n);
 
     // Affichage de la matrice et du vecteur en  Systemes d'equations
-    Equation::EquationDisplay(A,b);
+    Math::EquationDisplay(A,b);
 
     //debut de l'algorithme ,descente du gradient
     // declaration des variables
@@ -47,8 +51,11 @@ int main(){
     R = Math::soustract(b,AX);
     
     double alpha(0);
+    int compter(0);
 
-    while(abs(R.module())>EPS){
+    // on supossera que a la limite de MAX_ITERATION , la suite diverge
+    // et l'on sort de la boucle
+    while(abs(R.module())>EPS && compter<MAX_ITERATION){
         
         alpha=0;
         Z.clear();
@@ -63,10 +70,21 @@ int main(){
         X = Math::soustract(X,  Math::multiplication(alpha,R));
         // R = R - alpha*R
         R = Math::soustract(R,  Math::multiplication(alpha,Z));
+
+        compter++;
         
     }
+
     cout<<endl<<endl<<endl;
-    cout<<"La solution est X:"<<endl;
-    X.display();
+
+    if(compter<MAX_ITERATION){
+        cout<<"La solution est X:"<<endl;
+        X.display();
+    }
+    else{
+        cout<<"A la "<<MAX_ITERATION<<" la valeur de X vaut:"<<endl;
+        X.display();
+    }
+    
     return 0;
 }

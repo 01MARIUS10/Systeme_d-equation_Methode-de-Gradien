@@ -26,8 +26,7 @@ class Vecteur {
         void setVecteur(int i,double val);
         void setDimension(int n);
         double module();
-       
-        void display();
+       void display();
 };
 
 #endif
